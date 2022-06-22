@@ -100,6 +100,29 @@ public class ObjectSpecificActions {
                             break;
                     }
                     break;
+                case "RADIOBUTTON":
+                    RadioButton radioButton = new RadioButton(mobileElement);
+                    switch (actionType.trim().toUpperCase()) {
+                        case "DEFAULT":
+                        case "LCLICK":
+                            radioButton.click();
+                            break;
+                        case "RCLICK":
+                            break;
+                        case "SETON":
+                            if(!radioButton.isEnabled()){
+                                radioButton.click();
+                            }
+                            break;
+                        case "SETOFF":
+                            if(radioButton.isEnabled()){
+                                radioButton.click();
+                            }
+                            break;
+                        case "MOUSEOVER":
+                            break;
+                    }
+                    break;
             }
             return true;
         } catch (Exception e){

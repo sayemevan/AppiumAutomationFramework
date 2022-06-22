@@ -3,6 +3,8 @@ package register;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static register.DataProvider.*;
 
 public class ElementFinder {
@@ -13,6 +15,9 @@ public class ElementFinder {
         } else {
             return null;
         }
+    }
+    public static List<MobileElement> getElements(String searchedElementString) {
+        return APPIUM_DRIVER.findElements(getSpecificElementType(searchedElementString));
     }
     public static By getSpecificElementType(String searchedElementString){
         String[] splitedElementString = searchedElementString.split("~");

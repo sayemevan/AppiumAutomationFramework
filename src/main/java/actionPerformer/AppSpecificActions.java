@@ -1,5 +1,6 @@
 package actionPerformer;
 
+import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -28,6 +29,10 @@ public class AppSpecificActions {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void closeApp() {
+        APPIUM_DRIVER.closeApp();
     }
 
     public static void loadPrimaryDatas(){

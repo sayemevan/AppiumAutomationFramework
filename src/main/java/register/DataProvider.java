@@ -5,6 +5,8 @@ import io.appium.java_client.MobileElement;
 
 import java.util.Properties;
 
+import static utilities.utilityMethods.*;
+
 public class DataProvider {
     public static AppiumDriver<MobileElement> APPIUM_DRIVER;
     public static Properties APP_LOCATOR_VALUES, UTILITY_OBJECTS;
@@ -18,6 +20,7 @@ public class DataProvider {
                         APP = USER_PATH + APP_PATH,
                         APP_PACKAGE = "com.nopstation.nopcommerce.nopstationcart",
                         APP_ACTIVITY = "com.bs.ecommerce.main.SplashScreenActivity",
-                        APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub";
+                        APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub",
+                        DATE_TIME = currentDateAndTimeGet("yyyy-MM-dd hh:mm:ss a").replace(":", " ").replace(" ", "-");
     public static int MAX_WAIT_TIME = 30;
 }
