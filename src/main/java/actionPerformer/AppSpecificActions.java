@@ -1,36 +1,37 @@
 package actionPerformer;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+
+import static dataProvider.propertyFileReader.*;
+import static register.DataProvider.*;
 
 public class AppSpecificActions {
-    public static AppiumDriver<MobileElement> appiumDriver;
-    public static String path;
-    public static boolean LunchApp(){
+    public static void lunchApp(){
         try {
-            path = System.getProperty("user.dir");
+            loadPrimaryDatas();
+
             DesiredCapabilities desCap = new DesiredCapabilities();
-
             //device information
-            desCap.setCapability("platformName", "Android");
-            desCap.setCapability("deviceName", "emulator-5554");
+            desCap.setCapability("platformName", PLATFORM_NAME);
+            desCap.setCapability("deviceName", DEVICE_NAME);
             //app inforamtion
-            desCap.setCapability("app", path + "//src//test//resources//app//nopstationCart.apk");
-            desCap.setCapability("appPackage", "com.nopstation.nopcommerce.nopstationcart");
-            desCap.setCapability("appActivity", "com.bs.ecommerce.main.SplashScreenActivity");
+            desCap.setCapability("app", APP);
+            desCap.setCapability("appPackage", APP_PACKAGE);
+            desCap.setCapability("appActivity", APP_ACTIVITY);
 
-            appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), desCap);
-            appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            APPIUM_DRIVER = new AndroidDriver<MobileElement>(new URL(APPIUM_SERVER_URL), desCap);
             System.out.println("App lunched!");
-            return true;
         } catch (Exception e){
             e.printStackTrace();
-            return false;
         }
+    }
+
+    public static void loadPrimaryDatas(){
+        APP_LOCATOR_VALUES = objectRepositoryGet(APP_LOCATOR_PATH, APP_LOCATOR_FILE_NAME);
+        UTILITY_OBJECTS = objectRepositoryGet(APP_LOCATOR_PATH, UTILITY_OBJECTS_FILE_NAME);
     }
 }
