@@ -9,12 +9,7 @@ import static register.DataProvider.*;
 
 public class ElementFinder {
     public static MobileElement getElement(String searchedElementString) {
-        MobileElement getElement = APPIUM_DRIVER.findElement(getSpecificElementType(searchedElementString));
-        if (getElement != null) {
-            return getElement;
-        } else {
-            return null;
-        }
+        return APPIUM_DRIVER.findElement(getSpecificElementType(searchedElementString));
     }
     public static List<MobileElement> getElements(String searchedElementString) {
         return APPIUM_DRIVER.findElements(getSpecificElementType(searchedElementString));
