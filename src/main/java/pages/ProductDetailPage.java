@@ -27,7 +27,7 @@ public class ProductDetailPage {
     public static void selectProductQuantityBy(String size){
         try {
             visibilityAssert("UiPlusIconBtn", "DEFAULT", null);
-            int i = 1;
+            int i = 0;
             while (i < Integer.parseInt(size)) {
                 actionSet("UiPlusIconBtn", "LCLICK", null, null);
                 i++;
