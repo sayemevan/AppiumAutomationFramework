@@ -10,7 +10,7 @@ import static utilities.ObjectRepositoryActions.*;
 public class ObjectVisibility {
     public static boolean visibilityAssert(String uiObjectName, String maxWaitTime, String extraParam){
         try {
-            String uiObjectDetails = getValue(APP_LOCATOR_VALUES, APP_LOCATOR_FILE_NAME, uiObjectName);
+            String uiObjectDetails = getRepoValue(uiObjectName);
             if(maxWaitTime == null){
                 maxWaitTime = "NULL";
             }
@@ -32,7 +32,7 @@ public class ObjectVisibility {
     }
     public static boolean inVisibilityAssert(String uiObjectName, String maxWaitTime, String extraParam){
         try {
-            String uiObjectDetails = getValue(APP_LOCATOR_VALUES, APP_LOCATOR_FILE_NAME, uiObjectName);
+            String uiObjectDetails = getRepoValue(uiObjectName);
             if(maxWaitTime == null){
                 maxWaitTime = "NULL";
             }
