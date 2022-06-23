@@ -14,7 +14,7 @@ Feature: NopStation eCommerce Mobile App testing
     And Mike select checkout as guest from shopping cart page
     Then Mike input all the details in checkout billing details page and click continue
     And Mike select "Next Day Air" as shipping method and click continue
-    And Mike select "Check/Money Order" as payment method and click continue
-    And Mike click confirm button to place the order
-    Then Mike input all the details in checkout billing details page and click continue
+    And Mike select "Check / Money Order" as payment method and click continue
+    And Mike click next button on payment information page
+    Then Mike click confirm button to place the order
     And Verify order place successfully with popup message "Your order has been successfully processed!"
