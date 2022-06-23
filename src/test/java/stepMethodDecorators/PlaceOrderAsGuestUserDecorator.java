@@ -1,5 +1,6 @@
 package stepMethodDecorators;
 
+import org.junit.Assert;
 import pages.ProductCheckOutDetailsPage;
 import pages.ProductDetailPage;
 
@@ -41,6 +42,7 @@ public class PlaceOrderAsGuestUserDecorator {
         String actualMsg = ProductCheckOutDetailsPage.getOrderSuccessPopUpMessage();
         System.out.println("Actual Success Msg: " + actualMsg);
         ProductCheckOutDetailsPage.clickOrderSuccessContinueButton();
+//        Assert.assertEquals(actualMsg, expectedMessage);
         if (actualMsg.equals(expectedMessage) || actualMsg.trim().startsWith(expectedMessage)) {
             return true;
         } else {

@@ -1,9 +1,15 @@
 package dataProvider;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -71,6 +77,29 @@ public class ExcelUtilities {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static void excelSheetDataWrite(String fileLocation, String fileName, String dataSheetName, String acutalText, String testStatus,int rowid) {
+        try {
+            File file = new File(fileLocation + fileName);
+            FileInputStream inputStream = new FileInputStream(file);
+            Workbook writeExcelBook = null;
+            writeExcelBook = new XSSFWorkbook(inputStream);
+            Sheet sheet = writeExcelBook.getSheet(dataSheetName);
+            Row fillRow = sheet.getRow(rowid);
+
+            Cell cell = fillRow.createCell(fillRow.getLastCellNum() - 2);
+            Cell cell2 = fillRow.createCell(fillRow.getLastCellNum() - 1);
+            cell.setCellValue(acutalText);
+            cell2.setCellValue(testStatus);
+
+            inputStream.close();
+            FileOutputStream outputStream = new FileOutputStream(file);
+            writeExcelBook.write(outputStream);
+            outputStream.close();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
