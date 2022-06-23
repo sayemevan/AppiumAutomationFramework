@@ -12,37 +12,63 @@ import java.util.List;
 
 import static register.DataProvider.*;
 import static register.ElementFinder.*;
+import static utilities.ObjectRepositoryActions.*;
 
 public class SpecificItemSelector {
 
-    public static void scrollToElement(String uiObjectName, String scrollBetweenElements, String relatedText, boolean untilVisible) {
-        String objectsPropertyValue = UTILITY_OBJECTS.getProperty(uiObjectName);
-        if(objectsPropertyValue == null){
-            objectsPropertyValue = APP_LOCATOR_VALUES.getProperty(uiObjectName);
-        }
-        if(relatedText != null){
-            objectsPropertyValue = "XPATH~"+objectsPropertyValue.split("~")[1] + relatedText + objectsPropertyValue.split("~")[2];
-        }
+    public static void scrollUntilElementVisible(String uiObjectName, String elementNameForScrollBetween){
+        String objectsPropertyValue = getRepoValue(uiObjectName);
         int i = 0;
         while (getElements(objectsPropertyValue).size() == 0){
             i++;
-            if(scrollBetweenElements != null){
-                scrollBetweenElements(scrollBetweenElements);
-            } else {
-                scrollDown();
+            scrolling(elementNameForScrollBetween);
+            if(i > 100){
+                break;
             }
+        }
+    }
+
+    public static void scrollToElement(String uiObjectName, String elementNameForScrollBetween){
+        String objectsPropertyValue = getRepoValue(uiObjectName);
+        int i = 0;
+        while (getElements(objectsPropertyValue).size() == 0){
+            i++;
+            scrolling(elementNameForScrollBetween);
             if(i > 100){
                 break;
             }
         }
         if(getElements(objectsPropertyValue).size() > 0){
-            if(untilVisible){
-                return;
-            } else {
-                getElements(objectsPropertyValue).get(0).click();
-            }
+            getElements(objectsPropertyValue).get(0).click();
         }
     }
+
+    public static void dynamicScrollToElement(String uiObjectName, String elementNameForScrollBetween, String dynamicText){
+        String objectsPropertyValue = getRepoValue(uiObjectName);
+        if(dynamicText != null){
+            objectsPropertyValue = "XPATH~"+objectsPropertyValue.split("~")[1] + dynamicText + objectsPropertyValue.split("~")[2];
+        }
+        int i = 0;
+        while (getElements(objectsPropertyValue).size() == 0){
+            i++;
+            scrolling(elementNameForScrollBetween);
+            if(i > 100){
+                break;
+            }
+        }
+        if(getElements(objectsPropertyValue).size() > 0){
+            getElements(objectsPropertyValue).get(0).click();
+        }
+    }
+
+    public static void scrolling(String betweenElements){
+        if(betweenElements != null){
+            scrollBetweenElements(betweenElements);
+        } else {
+            scrollDown();
+        }
+    }
+
     public static void scrollDown(){
         Dimension dimension = APPIUM_DRIVER.manage().window().getSize();
 
@@ -56,7 +82,7 @@ public class SpecificItemSelector {
     }
 
     public static void scrollBetweenElements(String multipleValXpaths){
-        String objectsPropertyValue = UTILITY_OBJECTS.getProperty(multipleValXpaths);
+        String objectsPropertyValue = getRepoValue(multipleValXpaths);
         List<MobileElement> mobileElementList = getElements(objectsPropertyValue);
         MobileElement firstElement = mobileElementList.get(0);
         MobileElement lastElement = mobileElementList.get(mobileElementList.size()-1);
