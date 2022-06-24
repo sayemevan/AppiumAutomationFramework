@@ -2,15 +2,14 @@ package actionPerformer;
 
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.Select;
 import uiObjects.*;
 
 import static actionPerformer.ObjectVisibility.*;
-import static dataProvider.ExcelUtilities.excelSheetDataGet;
+import static externalFileHandler.ExcelUtilities.excelSheetDataGet;
 import static register.DataProvider.*;
 import static register.ElementFinder.*;
 import static utilities.ObjectRepositoryActions.*;
-import static utilities.SpecificItemSelector.*;
+import static utilities.OnPageElementScroller.*;
 
 public class ObjectSpecificActions {
 
@@ -27,7 +26,6 @@ public class ObjectSpecificActions {
             if(valueToBeSet == null){
                 valueToBeSet = "NULL";
             }
-            scrollUntilElementVisible(uiObjectName, null);
 
             switch (uiObjectDetails.split("~")[2].trim().toUpperCase()) {
                 case "TEXTBOX":
@@ -90,9 +88,10 @@ public class ObjectSpecificActions {
 //                            select.selectByValue("Bangladesh");
                             listBox.click();
                             //For selecting Bangladesh only
-                            Thread.sleep(1000);
+                            visibilityAssert("UiBangladesh", "DEFAULT", null);
                             getElement(getRepoValue("UiBangladesh")).click();
-                            Thread.sleep(2000);
+                            inVisibilityAssert("UiBangladesh","DEFAULT", null);
+                            Thread.sleep(1000);
                             break;
                         case "ITEMDESELECT":
                         case "SETBLANK":
@@ -179,7 +178,7 @@ public class ObjectSpecificActions {
                         valueToBeSet = valueToBeSet.substring(1, valueToBeSet.length()-1);
                     }
 
-                    scrollUntilElementVisible(uiObjectName, null);
+                    scrollUntilElementVisible(uiObjectName, null, 0);
                     actionSet(uiObjectName, actionType, valueToBeSet, extraParam);
                 }
             }

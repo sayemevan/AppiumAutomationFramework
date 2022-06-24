@@ -1,8 +1,5 @@
 package utilities;
 
-import java.util.Properties;
-
-import static dataProvider.propertyFileReader.*;
 import static register.DataProvider.*;
 
 public class ObjectRepositoryActions {

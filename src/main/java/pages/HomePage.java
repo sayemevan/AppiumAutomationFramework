@@ -2,9 +2,9 @@ package pages;
 
 import actionPerformer.AppSpecificActions;
 
-import static actionPerformer.ObjectSpecificActions.actionSet;
-import static actionPerformer.ObjectVisibility.visibilityAssert;
-import static utilities.SpecificItemSelector.dynamicScrollToElement;
+import static actionPerformer.ObjectSpecificActions.*;
+import static actionPerformer.ObjectVisibility.*;
+import static utilities.OnPageElementScroller.*;
 
 public class HomePage {
 
@@ -12,7 +12,7 @@ public class HomePage {
         try {
             AppSpecificActions.lunchApp();
             actionSet("UiReadAndAccept", "LCLICK", null, null);
-            Thread.sleep(3000);
+            inVisibilityAssert("UiReadAndAccept","DEFAULT", null);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -21,8 +21,8 @@ public class HomePage {
     public static void selectCategoryFromHomePage(String categoryName) {
         try {
             visibilityAssert("UiOurCategories", "DEFAULT", null);
-            dynamicScrollToElement("UiSpecificCategoriesList", "UiAllCategoriesList", categoryName);
-            Thread.sleep(3000);
+            dynamicScrollToElementAndClick("UiSpecificCategoriesList", "UiAllCategoriesList", categoryName, 10);
+            inVisibilityAssert("UiOurCategories","DEFAULT", null);
         } catch (Exception e){
             e.printStackTrace();
         }

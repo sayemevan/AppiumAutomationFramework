@@ -1,13 +1,12 @@
 package actionPerformer;
 
-import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-import static dataProvider.propertyFileReader.*;
+import static externalFileHandler.propertyFileReader.*;
 import static register.DataProvider.*;
 
 public class AppSpecificActions {

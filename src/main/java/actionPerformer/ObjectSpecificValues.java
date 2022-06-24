@@ -1,13 +1,12 @@
 package actionPerformer;
 
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.Keys;
 import uiObjects.*;
 
 import static actionPerformer.ObjectVisibility.visibilityAssert;
 import static register.ElementFinder.getElement;
 import static utilities.ObjectRepositoryActions.getRepoValue;
-import static utilities.SpecificItemSelector.scrollUntilElementVisible;
+import static utilities.OnPageElementScroller.scrollUntilElementVisible;
 
 public class ObjectSpecificValues {
     public static String valueGet(String uiObjectName, String propertyName, String extraParam){
@@ -20,8 +19,6 @@ public class ObjectSpecificValues {
             if (uiObjectName == null || propertyName == null || mobileElement == null || propertyName == null) {
                 return outputValue;
             }
-
-            scrollUntilElementVisible(uiObjectName, null);
 
             switch (uiObjectDetails.split("~")[2].trim().toUpperCase()) {
                 case "TEXTBOX":

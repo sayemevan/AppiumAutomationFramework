@@ -1,4 +1,4 @@
-package dataProvider;
+package externalFileHandler;
 
 import java.io.InputStream;
 import java.util.Properties;
