@@ -40,6 +40,12 @@ public class OnPageElementScroller {
         }
     }
 
+    public static void scrollToElementByText(String searchedText, int instanceNo){
+        ANDROID_DRIVER.findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""
+                        + searchedText + "\").instance("+ instanceNo +"))").click();
+    }
+
     public static void scrollDown(int scrollAmount){
         int amountOfscroll = 1, scrollStart, scrollEnd;
         Dimension dimension;
@@ -48,7 +54,7 @@ public class OnPageElementScroller {
             amountOfscroll = scrollAmount;
         }
         for(int i = 0; i < amountOfscroll; i++) {
-            dimension = APPIUM_DRIVER.manage().window().getSize();
+            dimension = ANDROID_DRIVER.manage().window().getSize();
             scrollHeightStart = dimension.getHeight() * 0.5;
             scrollStart = (int) scrollHeightStart;
             scrollHeightEnd = dimension.getHeight() * 0.2;
@@ -76,7 +82,7 @@ public class OnPageElementScroller {
     }
 
     public static void touchActionPerform(int startX, int startY, int endX, int endY){
-        new TouchAction(APPIUM_DRIVER)
+        new TouchAction(ANDROID_DRIVER)
                 .press(PointOption.point(startX, startY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(endX, endY))

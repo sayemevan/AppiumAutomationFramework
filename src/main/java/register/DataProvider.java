@@ -2,6 +2,7 @@ package register;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import static utilities.utilityMethods.*;
 
 public class DataProvider {
-    public static AppiumDriver<MobileElement> APPIUM_DRIVER;
+    public static AndroidDriver<MobileElement> ANDROID_DRIVER;
     public static Properties APP_LOCATOR_VALUES, UTILITY_OBJECTS;
     public static String USER_PATH = System.getProperty("user.dir"),
                         APP_PATH = "//src//test//resources//app//nopstationCart.apk",

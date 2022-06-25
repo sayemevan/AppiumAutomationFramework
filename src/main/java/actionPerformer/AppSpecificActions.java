@@ -23,7 +23,7 @@ public class AppSpecificActions {
             desCap.setCapability("appPackage", APP_PACKAGE);
             desCap.setCapability("appActivity", APP_ACTIVITY);
 
-            APPIUM_DRIVER = new AndroidDriver<MobileElement>(new URL(APPIUM_SERVER_URL), desCap);
+            ANDROID_DRIVER = new AndroidDriver<MobileElement>(new URL(APPIUM_SERVER_URL), desCap);
             System.out.println("App lunched!");
         } catch (Exception e){
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class AppSpecificActions {
     }
 
     public static void closeApp() {
-        APPIUM_DRIVER.closeApp();
+        ANDROID_DRIVER.closeApp();
     }
 
     public static void loadPrimaryDatas(){

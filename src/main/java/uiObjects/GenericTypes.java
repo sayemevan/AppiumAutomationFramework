@@ -63,11 +63,4 @@ public abstract class GenericTypes extends MobileElement implements WrapsMobileE
     public void submit() {
         getWrapsMobileElement().submit();
     }
-
-    public static MobileElement scrollToElement(String outSiderText) {
-
-        return (MobileElement) ((FindsByAndroidUIAutomator) APPIUM_DRIVER).findElementByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector()" + ".scrollable(true)).scrollIntoView("
-                        + "new UiSelector().description("+ outSiderText +"));");
-    }
 }

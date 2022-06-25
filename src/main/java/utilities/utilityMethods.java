@@ -19,12 +19,12 @@ import static register.DataProvider.*;
 public class utilityMethods {
 
     public void startRecordingScreen() {
-        ((CanRecordScreen) APPIUM_DRIVER).startRecordingScreen();
+        ((CanRecordScreen) ANDROID_DRIVER).startRecordingScreen();
     }
 
     public void saveRecordedVideo(ITestResult result) throws IOException {
 
-        String media = ((CanRecordScreen) APPIUM_DRIVER).stopRecordingScreen();
+        String media = ((CanRecordScreen) ANDROID_DRIVER).stopRecordingScreen();
         if (result.getStatus() == 2) {
             Map<String, String> params;
             params = result.getTestContext().getCurrentXmlTest().getAllParameters();

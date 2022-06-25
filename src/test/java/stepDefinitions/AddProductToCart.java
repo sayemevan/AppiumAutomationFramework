@@ -12,7 +12,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import stepMethodDecorators.AddProductToCartDecorator;
 
-import static register.DataProvider.APPIUM_DRIVER;
+import static register.DataProvider.ANDROID_DRIVER;
 
 
 public class AddProductToCart {
@@ -24,7 +24,7 @@ public class AddProductToCart {
 
     @AfterStep
     public void addScreenshot(Scenario scenario){
-        final byte[] screenshot = ((TakesScreenshot) APPIUM_DRIVER).getScreenshotAs(OutputType.BYTES);
+        final byte[] screenshot = ((TakesScreenshot) ANDROID_DRIVER).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", "image");
     }
 

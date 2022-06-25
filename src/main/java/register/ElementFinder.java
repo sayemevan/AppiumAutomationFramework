@@ -9,10 +9,10 @@ import static register.DataProvider.*;
 
 public class ElementFinder {
     public static MobileElement getElement(String searchedElementString) {
-        return APPIUM_DRIVER.findElement(getSpecificElementType(searchedElementString));
+        return ANDROID_DRIVER.findElement(getSpecificElementType(searchedElementString));
     }
     public static List<MobileElement> getElements(String searchedElementString) {
-        return APPIUM_DRIVER.findElements(getSpecificElementType(searchedElementString));
+        return ANDROID_DRIVER.findElements(getSpecificElementType(searchedElementString));
     }
     public static By getSpecificElementType(String searchedElementString){
         String[] splitedElementString = searchedElementString.split("~");
