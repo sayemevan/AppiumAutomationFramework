@@ -1,34 +1,42 @@
 package stepDefinitions;
 
 import actionPerformer.AppSpecificActions;
-import extentReport.ExtentReport;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import stepMethodDecorators.AddProductToCartDecorator;
+
+import static register.DataProvider.APPIUM_DRIVER;
 
 
 public class AddProductToCart {
 
-    @Before
-    public void beforeTest() {
+    @BeforeAll
+    public static void before_all() {
         AppSpecificActions.lunchApp();
+    }
+
+    @AfterStep
+    public void addScreenshot(Scenario scenario){
+        final byte[] screenshot = ((TakesScreenshot) APPIUM_DRIVER).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", "image");
     }
 
     @Given("^Mike on home page after opening nopCart mobile app$")
     public void mike_on_home_page_after_opening_nop_cart_mobile_app() {
         AddProductToCartDecorator.userOnHomePage();
-        ExtentReport.startTest("Mike on home page", "Mike on home page after opening nopCart mobile app");
     }
 
 
     @When("Mike click {string} from our categories list from home page")
     public void mike_click_from_our_categories_list_from_home_page(String string) {
         AddProductToCartDecorator.selectCategoryFromHomePage(string);
-        ExtentReport.startTest("Mike click on category", "Mike click on electric category");
     }
 
 

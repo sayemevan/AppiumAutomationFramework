@@ -31,7 +31,6 @@ public class ProductCheckOutDetailsPage {
             visibilityAssert("UiFirstName", "DEFAULT", null);
             groupDatActionSetFromExcel("CustomerDetails", null);
             clickContinueButton();
-            inVisibilityAssert("UiFax","DEFAULT", null);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -111,7 +110,8 @@ public class ProductCheckOutDetailsPage {
 
     public static void clickContinueButton(){
         try {
-            scrollToElementAndClick("UiContinue", null, 10);
+            scrollToElementAndClick("UiContinue", null, 0);
+            Thread.sleep(1000);
         } catch (Exception e){
             e.printStackTrace();
         }
