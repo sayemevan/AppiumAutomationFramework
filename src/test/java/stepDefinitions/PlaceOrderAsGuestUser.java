@@ -1,13 +1,12 @@
 package stepDefinitions;
 
+import actionPerformer.AppSpecificActions;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import stepMethodDecorators.PlaceOrderAsGuestUserDecorator;
-
-import static actionPerformer.AppSpecificActions.closeApp;
 
 public class PlaceOrderAsGuestUser {
 
@@ -51,6 +50,6 @@ public class PlaceOrderAsGuestUser {
 
     @After
     public void afterTest() {
-        closeApp();
+        AppSpecificActions.closeApp();
     }
 }
