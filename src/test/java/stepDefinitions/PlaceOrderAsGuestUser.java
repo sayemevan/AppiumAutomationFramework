@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,6 +10,7 @@ import stepMethodDecorators.PlaceOrderAsGuestUserDecorator;
 import static actionPerformer.AppSpecificActions.closeApp;
 
 public class PlaceOrderAsGuestUser {
+
     @Given("^Mike go to shopping cart by clicking top cart icon$")
     public void mike_go_to_shopping_cart_by_clicking_top_cart_icon() {
         PlaceOrderAsGuestUserDecorator.goToShoppingCart();
@@ -45,6 +47,10 @@ public class PlaceOrderAsGuestUser {
     @And("Verify order place successfully with popup message {string}")
     public void verify_order_place_successfully_with_popup_message(String string) {
         PlaceOrderAsGuestUserDecorator.verifyPopUpMessage(string);
+    }
+
+    @After
+    public void afterTest() {
         closeApp();
     }
 }

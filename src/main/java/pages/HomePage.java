@@ -10,7 +10,6 @@ public class HomePage {
 
     public static void userOnHomePage(){
         try {
-            AppSpecificActions.lunchApp();
             actionSet("UiReadAndAccept", "LCLICK", null, null);
             inVisibilityAssert("UiReadAndAccept","DEFAULT", null);
         } catch (Exception e){
