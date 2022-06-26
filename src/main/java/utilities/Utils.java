@@ -2,7 +2,6 @@ package utilities;
 
 import io.appium.java_client.screenrecording.CanRecordScreen;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,12 +10,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
-import static register.DataProvider.*;
+import static register.Data.*;
 
-public class utilityMethods {
+public class Utils {
 
     public void startRecordingScreen() {
         ((CanRecordScreen) ANDROID_DRIVER).startRecordingScreen();

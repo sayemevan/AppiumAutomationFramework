@@ -1,19 +1,16 @@
 package register;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
-import static utilities.utilityMethods.*;
+import static utilities.Utils.*;
 
-public class DataProvider {
+public class Data {
     public static AndroidDriver<MobileElement> ANDROID_DRIVER;
-    public static Properties APP_LOCATOR_VALUES, UTILITY_OBJECTS;
+    public static String[] nameOfPropertyFiles = { "APP_LOCATOR_VALUES", "UTILITY_OBJECTS"};
+    public static HashMap<PropertyFile, Properties> LIST_OF_ALL_PROPERTIES;
     public static String USER_PATH = System.getProperty("user.dir"),
                         APP_PATH = "//src//test//resources//app//nopstationCart.apk",
                         APP_LOCATOR_PATH = "locatorValues//",
@@ -29,5 +26,5 @@ public class DataProvider {
                         APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub",
                         DATE_TIME = currentDateAndTimeGet("yyyy-MM-dd hh:mm:ss a").replace(":", " ").replace(" ", "-");
     public static int MAX_WAIT_TIME = 30;
-    public static Map<String, List<LinkedHashMap<String, String>>> excelSheetList = new LinkedHashMap<>();
+    public static Map<String, List<LinkedHashMap<String, String>>> excelSheetMap = new LinkedHashMap<>();
 }

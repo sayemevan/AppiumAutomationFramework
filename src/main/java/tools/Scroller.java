@@ -1,28 +1,28 @@
-package utilities;
+package tools;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
+import utilities.PropertyUtils;
 
 
 import java.time.Duration;
 import java.util.List;
 
-import static register.DataProvider.*;
-import static register.ElementFinder.*;
-import static utilities.ObjectRepositoryActions.*;
+import static register.Data.*;
+import static register.Element.*;
 
-public class OnPageElementScroller {
+public class Scroller {
 
     public static void scrollUntilElementVisible(String uiObjectName, String elementNameForScrollBetween, int maxTimeInSecOfScrolling){
-        String objectsPropertyValue = getRepoValue(uiObjectName);
+        String objectsPropertyValue = PropertyUtils.getValue(uiObjectName);
         scrollWithTime(objectsPropertyValue, elementNameForScrollBetween, maxTimeInSecOfScrolling);
     }
 
     public static void scrollToElementAndClick(String uiObjectName, String elementNameForScrollBetween, int maxTimeInSecOfScrolling){
-        String objectsPropertyValue = getRepoValue(uiObjectName);
+        String objectsPropertyValue = PropertyUtils.getValue(uiObjectName);
         scrollWithTime(objectsPropertyValue, elementNameForScrollBetween, maxTimeInSecOfScrolling);
         if(getElements(objectsPropertyValue).size() > 0){
             getElements(objectsPropertyValue).get(0).click();
@@ -30,7 +30,7 @@ public class OnPageElementScroller {
     }
 
     public static void dynamicScrollToElementAndClick(String uiObjectName, String elementNameForScrollBetween, String dynamicText, int maxTimeInSecOfScrolling){
-        String objectsPropertyValue = getRepoValue(uiObjectName);
+        String objectsPropertyValue = PropertyUtils.getValue(uiObjectName);
         if(dynamicText != null){
             objectsPropertyValue = "XPATH~"+objectsPropertyValue.split("~")[1] + dynamicText + objectsPropertyValue.split("~")[2];
         }
@@ -68,7 +68,7 @@ public class OnPageElementScroller {
         MobileElement firstElement, lastElement;
         int midOfYCoordinator, firstElementXCoordinator, lastElementXCoordinator;
 
-        String objectsPropertyValue = getRepoValue(multipleValXpaths);
+        String objectsPropertyValue = PropertyUtils.getValue(multipleValXpaths);
         List<MobileElement> mobileElementList = getElements(objectsPropertyValue);
         firstElement = mobileElementList.get(0);
         lastElement = mobileElementList.get(mobileElementList.size()-1);

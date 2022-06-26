@@ -1,28 +1,25 @@
-package actionPerformer;
+package tools;
 
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.Keys;
+import register.Data;
+import register.Element;
 import uiObjects.*;
+import utilities.ExcelUtils;
+import utilities.PropertyUtils;
 
-import static actionPerformer.ObjectVisibility.*;
-import static externalFileHandler.ExcelUtilities.excelSheetDataGet;
-import static register.DataProvider.*;
-import static register.ElementFinder.*;
-import static utilities.ObjectRepositoryActions.*;
-import static utilities.OnPageElementScroller.*;
-
-public class ObjectSpecificActions {
+public class ObjectActions {
 
     private static int INSTANCE_NO;
 
-    public static boolean actionSet(String uiObjectName, String actionType, String valueToBeSet, String extraParam){
+    public static boolean set(String uiObjectName, String actionType, String valueToBeSet, String extraParam){
         try {
             INSTANCE_NO = 0;
-            String uiObjectDetails = getRepoValue(uiObjectName);
-            if (!visibilityAssert(uiObjectName, "DEFAULT", null)) {
+            String uiObjectDetails = PropertyUtils.getValue(uiObjectName);
+            if (!ObjectVisibility.assertVisibility(uiObjectName, "DEFAULT", null)) {
                 return false;
             }
-            MobileElement mobileElement = getElement(uiObjectDetails);
+            MobileElement mobileElement = Element.getElement(uiObjectDetails);
             if (uiObjectName == null || actionType == null || mobileElement == null) {
                 return false;
             }
@@ -31,7 +28,7 @@ public class ObjectSpecificActions {
             }
 
             if(extraParam != null && !extraParam.trim().equals("NULL")){
-                extraParamProcess(extraParam);
+                processExtraParam(extraParam);
             }
 
             switch (uiObjectDetails.split("~")[2].trim().toUpperCase()) {
@@ -93,7 +90,7 @@ public class ObjectSpecificActions {
                         case "ITEMSELECT":
                             listBox.click();
                             Thread.sleep(1000);
-                            scrollToElementByText(valueToBeSet, INSTANCE_NO);
+                            Scroller.scrollToElementByText(valueToBeSet, INSTANCE_NO);
                             break;
                         case "ITEMDESELECT":
                         case "SETBLANK":
@@ -168,21 +165,21 @@ public class ObjectSpecificActions {
         }
     }
 
-    public static boolean groupDatActionSetFromExcel(String dataSheetName, String extraParam) {
+    public static boolean setGroupAction(String sheetName, String extraParam) {
         try {
             String uiObjectName, actionType, valueToBeSet, extraActionIndicator;
-            if(excelSheetDataGet(EXCEL_SHEET_FILE_NAME, EXCEL_SHEET_FILE_PATH, dataSheetName, null)) {
-                for (int j = 0; j < excelSheetList.get(dataSheetName).size(); j++) {
-                    uiObjectName = excelSheetList.get(dataSheetName).get(j).get("UiObjectName");
-                    actionType = excelSheetList.get(dataSheetName).get(j).get("ActionType");
-                    valueToBeSet = excelSheetList.get(dataSheetName).get(j).get("ValueToBeSet");
-                    extraActionIndicator = excelSheetList.get(dataSheetName).get(j).get("ExtraActionIndicator");
+            if(ExcelUtils.getData(Data.EXCEL_SHEET_FILE_NAME, Data.EXCEL_SHEET_FILE_PATH, sheetName, null)) {
+                for (int j = 0; j < Data.excelSheetMap.get(sheetName).size(); j++) {
+                    uiObjectName = Data.excelSheetMap.get(sheetName).get(j).get("UiObjectName");
+                    actionType = Data.excelSheetMap.get(sheetName).get(j).get("ActionType");
+                    valueToBeSet = Data.excelSheetMap.get(sheetName).get(j).get("ValueToBeSet");
+                    extraActionIndicator = Data.excelSheetMap.get(sheetName).get(j).get("ExtraActionIndicator");
 
                     valueToBeSet = checkDoubleQuotes(valueToBeSet);
                     extraActionIndicator = checkDoubleQuotes(extraActionIndicator);
 
-                    scrollUntilElementVisible(uiObjectName, null, 0);
-                    actionSet(uiObjectName, actionType, valueToBeSet, extraActionIndicator);
+                    Scroller.scrollUntilElementVisible(uiObjectName, null, 0);
+                    set(uiObjectName, actionType, valueToBeSet, extraActionIndicator);
                 }
             }
             return true;
@@ -199,7 +196,7 @@ public class ObjectSpecificActions {
         return valueToCheck;
     }
 
-    private static void extraParamProcess(String extraParam){
+    private static void processExtraParam(String extraParam){
         String extraActions[] = extraParam.trim().split("\\|");
         for(String extraAction: extraActions){
             switch (extraAction.trim().split(":")[0].trim()){

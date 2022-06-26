@@ -1,6 +1,6 @@
 package stepDefinitions;
 
-import actionPerformer.AppSpecificActions;
+import tools.AppSpecificActions;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
@@ -12,7 +12,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import stepMethodDecorators.AddProductToCartDecorator;
 
-import static register.DataProvider.ANDROID_DRIVER;
+import static register.Data.ANDROID_DRIVER;
 
 
 public class AddProductToCart {

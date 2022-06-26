@@ -1,6 +1,6 @@
 package stepDefinitions;
 
-import actionPerformer.AppSpecificActions;
+import tools.AppSpecificActions;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

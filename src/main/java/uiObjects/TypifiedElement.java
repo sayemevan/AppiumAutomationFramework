@@ -1,16 +1,12 @@
 package uiObjects;
 
-import io.appium.java_client.FindsByAndroidUIAutomator;
 import io.appium.java_client.MobileElement;
-import register.WrapsMobileElement;
 
-import static register.DataProvider.*;
-
-public abstract class GenericTypes extends MobileElement implements WrapsMobileElement {
+public abstract class TypifiedElement extends MobileElement implements WrapsMobileElement {
 
     private final MobileElement wrappedMobileElement;
 
-    public GenericTypes(MobileElement wrappedMobileElement) {
+    public TypifiedElement(MobileElement wrappedMobileElement) {
         this.wrappedMobileElement = wrappedMobileElement;
     }
 

@@ -1,4 +1,4 @@
-package externalFileHandler;
+package utilities;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import register.Data;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,11 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import static register.DataProvider.*;
 
-public class ExcelUtilities {
+public class ExcelUtils {
 
-    public static boolean excelSheetDataGet(String fileName, String fileLocation, String dataSheetName, String extraParam) {
+    public static boolean getData(String fileName, String fileLocation, String sheetName, String extraParam) {
         List<LinkedHashMap<String, String>> dataList = new ArrayList<>();
         String excelFile;
         XSSFWorkbook workbook;
@@ -34,9 +34,9 @@ public class ExcelUtilities {
 
             workbook = new XSSFWorkbook(excelFile);
 
-            dataSheetName = dataSheetName.trim();
-            if (workbook.getSheet(dataSheetName) != null) {
-                sheet = workbook.getSheet(dataSheetName);
+            sheetName = sheetName.trim();
+            if (workbook.getSheet(sheetName) != null) {
+                sheet = workbook.getSheet(sheetName);
             } else {
                 System.out.println("DataSheet is not found, please check sheet name!");
                 workbook.close();
@@ -50,7 +50,7 @@ public class ExcelUtilities {
                     Row row = sheet.getRow(0);
                     LinkedHashMap<String, String> rowData = new LinkedHashMap<>();
                     for (int j = 0; j < row.getLastCellNum(); j++) {
-                        if (emptyCellCheck(sheet, i, j)) {
+                        if (isEmptyCell(sheet, i, j)) {
                             key = row.getCell(j).getStringCellValue().trim();
                             value = sheet.getRow(i).getCell(j).getStringCellValue();
                             rowData.put(key, value);
@@ -58,7 +58,7 @@ public class ExcelUtilities {
                     }
                     dataList.add(rowData);
                 }
-                excelSheetList.put(dataSheetName, dataList);
+                Data.excelSheetMap.put(sheetName, dataList);
             }
             return true;
         } catch (IOException e) {
@@ -68,7 +68,7 @@ public class ExcelUtilities {
     }
 
     //Excel sheet null value handler
-    public static boolean emptyCellCheck(XSSFSheet xssfSheet, int row, int col) {
+    public static boolean isEmptyCell(XSSFSheet xssfSheet, int row, int col) {
         try {
             return xssfSheet.getRow(row).getCell(col) != null
                     && xssfSheet.getRow(row).getCell(col).getStringCellValue() != null
@@ -80,7 +80,7 @@ public class ExcelUtilities {
         }
     }
 
-    public static void excelSheetDataWrite(String fileLocation, String fileName, String dataSheetName, String acutalText, String testStatus,int rowid) {
+    public static void writeData(String fileLocation, String fileName, String dataSheetName, String acutalText, String testStatus, int rowid) {
         try {
             File file = new File(fileLocation + fileName);
             FileInputStream inputStream = new FileInputStream(file);
