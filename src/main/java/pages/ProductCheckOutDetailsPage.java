@@ -50,7 +50,7 @@ public class ProductCheckOutDetailsPage {
             } else {
                 Scroller.scrollToElementAndClick(UiObjectName, null, 20);
             }
-            Scroller.scrollDown(2);
+            Scroller.scrollDown(1);
             clickContinueButton();
         } catch (Exception e){
             System.out.println("Selecting shipping method is failed!");

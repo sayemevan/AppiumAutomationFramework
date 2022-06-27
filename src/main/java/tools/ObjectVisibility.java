@@ -18,7 +18,7 @@ public class ObjectVisibility {
                 final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 0);
                 wait.until(ExpectedConditions.visibilityOf(Element.getElement(uiObjectDetails)));
             } else if (maxWaitTime.equals("DEFAULT")) {
-                final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Data.getDefaultMaxWaitTime());
+                final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Data.DEFAULT_MAX_WAIT_TIME);
                 wait.until(ExpectedConditions.visibilityOfElementLocated(Element.getElementType(uiObjectDetails)));
             } else {
                 final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Integer.parseInt(maxWaitTime));
@@ -40,7 +40,7 @@ public class ObjectVisibility {
                 final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 0);
                 wait.until(ExpectedConditions.invisibilityOf(Element.getElement(uiObjectDetails)));
             } else if (maxWaitTime.equals("DEFAULT")) {
-                final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Data.getDefaultMaxWaitTime());
+                final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Data.DEFAULT_MAX_WAIT_TIME);
                 wait.until(ExpectedConditions.invisibilityOfElementLocated(Element.getElementType(uiObjectDetails)));
             } else {
                 final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Integer.parseInt(maxWaitTime));

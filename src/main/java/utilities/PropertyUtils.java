@@ -32,7 +32,7 @@ public class PropertyUtils {
 
     public static String getValue(String uiObjectName){
         for (PropertyFile propertyFile: PropertyFile.values()){
-            Properties properties = Data.getListOfAllProperties().get(propertyFile);
+            Properties properties = Data.getMapOfAllProperties().get(propertyFile);
             if (properties.getProperty(uiObjectName) != null) {
                 return properties.getProperty(uiObjectName);
             }
@@ -50,7 +50,7 @@ public class PropertyUtils {
 
     public static void addOrReplaceValue(String uiObjectKeyName, String uiObjectValue){
         for (PropertyFile propertyFile: PropertyFile.values()){
-            Properties properties = Data.getListOfAllProperties().get(propertyFile);
+            Properties properties = Data.getMapOfAllProperties().get(propertyFile);
             if (properties.getProperty(uiObjectKeyName) != null) {
                 properties.replace(uiObjectKeyName, uiObjectValue);
             } else {

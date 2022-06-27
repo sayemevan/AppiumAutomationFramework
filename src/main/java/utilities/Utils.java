@@ -28,7 +28,7 @@ public class Utils {
             params = result.getTestContext().getCurrentXmlTest().getAllParameters();
 
             String dir = "videos" + File.separator + params.get("platformName") + "_" + params.get("platformVersion") + "_" + params.get(("deviceName")) +
-                    File.separator + Data.getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName();
+                    File.separator + Data.CURRENT_DATE_TIME + File.separator + result.getTestClass().getRealClass().getSimpleName();
 
             File videoFile = new File(dir);
             if (!videoFile.exists()) {

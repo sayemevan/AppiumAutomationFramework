@@ -90,7 +90,7 @@ public class Scroller {
     }
 
     private static long scrollMethodTimeCount(int maxTimeInSecOfScrolling){
-        long waitTime = Data.getDefaultMaxWaitTime() * 1000;
+        long waitTime = Data.DEFAULT_MAX_WAIT_TIME * 1000;
         if(maxTimeInSecOfScrolling > 0){
             waitTime = maxTimeInSecOfScrolling * 1000;
         }

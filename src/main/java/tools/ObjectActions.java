@@ -168,7 +168,7 @@ public class ObjectActions {
     public static boolean setGroupAction(String sheetName, String extraParam) {
         try {
             String uiObjectName, actionType, valueToBeSet, extraActionIndicator;
-            Data.getExcelSheetMap().put(sheetName, ExcelUtils.getData(Data.getExcelSheetFileName(), Data.getExcelSheetFilePath(), sheetName));
+            Data.getExcelSheetMap().put(sheetName, ExcelUtils.getData(Data.EXCEL_SHEET_FILE_NAME, Data.EXCEL_SHEET_FILE_PATH, sheetName));
             for (int j = 0; j < Data.getExcelSheetMap().get(sheetName).size(); j++) {
                 uiObjectName = Data.getExcelSheetMap().get(sheetName).get(j).get("UiObjectName");
                 actionType = Data.getExcelSheetMap().get(sheetName).get(j).get("ActionType");
