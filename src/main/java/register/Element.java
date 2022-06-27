@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Element {
     public static MobileElement getElement(String searchedElementString) {
-        return Data.ANDROID_DRIVER.findElement(getElementType(searchedElementString));
+        return Driver.getDriver().findElement(getElementType(searchedElementString));
     }
     public static List<MobileElement> getElements(String searchedElementString) {
-        return Data.ANDROID_DRIVER.findElements(getElementType(searchedElementString));
+        return Driver.getDriver().findElements(getElementType(searchedElementString));
     }
     public static By getElementType(String searchedElementString){
         String[] splitedElementString = searchedElementString.split("~");

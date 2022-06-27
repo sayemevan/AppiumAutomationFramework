@@ -23,11 +23,11 @@ public class PlaceOrderAsGuestUserDecorator {
     }
 
     public static void selectShippingMethodAndContinue(String shippingMethodName){
-        ProductCheckOutDetailsPage.selectShippingMethodAndContinue(shippingMethodName);
+        ProductCheckOutDetailsPage.selectShippingMethodAndContinue(shippingMethodName, null);
     }
 
     public static void selectPaymentMethodAndContinue(String paymentMethodName){
-        ProductCheckOutDetailsPage.selectPaymentMethodAndContinue(paymentMethodName);
+        ProductCheckOutDetailsPage.selectPaymentMethodAndContinue(paymentMethodName, null);
     }
 
     public static void clickNextButton(){

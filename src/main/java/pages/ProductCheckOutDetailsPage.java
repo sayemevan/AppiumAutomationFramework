@@ -14,6 +14,7 @@ public class ProductCheckOutDetailsPage {
             ObjectActions.set("UiCheckOutBtn", "LCLICK", null, null);
             ObjectVisibility.assertInVisibility("UiCheckOutBtn","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Clicking to check button is failed!");
             e.printStackTrace();
         }
     }
@@ -23,6 +24,7 @@ public class ProductCheckOutDetailsPage {
             ObjectActions.set("UiCheckOutAsGuestBtn", "LCLICK", null, null);
             ObjectVisibility.assertInVisibility("UiCheckOutAsGuestBtn","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Clicking to check out as guest is failed!");
             e.printStackTrace();
         }
     }
@@ -37,7 +39,8 @@ public class ProductCheckOutDetailsPage {
         }
     }
 
-    public static void selectShippingMethodAndContinue(String shippingMethodName){
+    //Provide any one value for this method and another one should be null.
+    public static void selectShippingMethodAndContinue(String shippingMethodName, String UiObjectName){
         try {
             if(shippingMethodName != null){
                 String objectsPropertyValue = PropertyUtils.getValue("UiShippingMethod");
@@ -45,17 +48,18 @@ public class ProductCheckOutDetailsPage {
                 PropertyUtils.addOrReplaceValue("UiShippingMethod", objectsPropertyValue);
                 Scroller.scrollToElementAndClick("UiShippingMethod", null, 20);
             } else {
-                Scroller.scrollToElementAndClick("UiNextDayAir", null, 20);
-//                actionSet("UiNextDayAir", "DEFAULT", null, null);
+                Scroller.scrollToElementAndClick(UiObjectName, null, 20);
             }
             Scroller.scrollDown(2);
             clickContinueButton();
         } catch (Exception e){
+            System.out.println("Selecting shipping method is failed!");
             e.printStackTrace();
         }
     }
 
-    public static void selectPaymentMethodAndContinue(String paymentMethodName){
+    //Provide any one value for this method and another one should be null.
+    public static void selectPaymentMethodAndContinue(String paymentMethodName, String UiObjectName){
         try {
             if(paymentMethodName != null){
                 String objectsPropertyValue = PropertyUtils.getValue("UiPaymentMethod");
@@ -63,12 +67,12 @@ public class ProductCheckOutDetailsPage {
                 PropertyUtils.addOrReplaceValue("UiPaymentMethod", objectsPropertyValue);
                 Scroller.scrollToElementAndClick("UiPaymentMethod", null, 30);
             } else {
-                Scroller.scrollToElementAndClick("UiCheckMoneyOrder", null, 30);
-//                actionSet("UiCheckMoneyOrder", "DEFAULT", null, null);
+                Scroller.scrollToElementAndClick(UiObjectName, null, 30);
             }
             Scroller.scrollDown(2);
             clickContinueButton();
         } catch (Exception e){
+            System.out.println("Selecting payment method is failed!");
             e.printStackTrace();
         }
     }
@@ -78,6 +82,7 @@ public class ProductCheckOutDetailsPage {
             ObjectActions.set("UiNextBtn", "DEFAULT", null, null);
             ObjectVisibility.assertInVisibility("UiNextBtn","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Clicking to next button is failed!");
             e.printStackTrace();
         }
     }
@@ -87,6 +92,7 @@ public class ProductCheckOutDetailsPage {
             ObjectActions.set("UiConfirmBtn", "DEFAULT", null, null);
             ObjectVisibility.assertInVisibility("UiNextBtn","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Clicking to confirm button is failed!");
             e.printStackTrace();
         }
     }
@@ -114,6 +120,7 @@ public class ProductCheckOutDetailsPage {
             Scroller.scrollToElementAndClick("UiContinue", null, 0);
             Thread.sleep(1000);
         } catch (Exception e){
+            System.out.println("Clicking to continue button is failed!");
             e.printStackTrace();
         }
     }

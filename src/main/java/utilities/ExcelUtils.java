@@ -18,14 +18,14 @@ import java.util.List;
 
 public class ExcelUtils {
 
-    public static boolean getData(String fileName, String fileLocation, String sheetName, String extraParam) {
+    public static List<LinkedHashMap<String, String>> getData(String fileName, String fileLocation, String sheetName) {
         List<LinkedHashMap<String, String>> dataList = new ArrayList<>();
         String excelFile;
         XSSFWorkbook workbook;
         XSSFSheet sheet;
         try {
             if(fileName == null || fileLocation == null){
-                return false;
+                return null;
             }
             excelFile = fileLocation + fileName;
             if (!excelFile.contains(".xlsx")) {
@@ -40,7 +40,7 @@ public class ExcelUtils {
             } else {
                 System.out.println("DataSheet is not found, please check sheet name!");
                 workbook.close();
-                return false;
+                return null;
             }
 
             int rowCount = sheet.getLastRowNum();
@@ -58,12 +58,11 @@ public class ExcelUtils {
                     }
                     dataList.add(rowData);
                 }
-                Data.excelSheetMap.put(sheetName, dataList);
             }
-            return true;
+            return dataList;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

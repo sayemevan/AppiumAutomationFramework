@@ -168,19 +168,18 @@ public class ObjectActions {
     public static boolean setGroupAction(String sheetName, String extraParam) {
         try {
             String uiObjectName, actionType, valueToBeSet, extraActionIndicator;
-            if(ExcelUtils.getData(Data.EXCEL_SHEET_FILE_NAME, Data.EXCEL_SHEET_FILE_PATH, sheetName, null)) {
-                for (int j = 0; j < Data.excelSheetMap.get(sheetName).size(); j++) {
-                    uiObjectName = Data.excelSheetMap.get(sheetName).get(j).get("UiObjectName");
-                    actionType = Data.excelSheetMap.get(sheetName).get(j).get("ActionType");
-                    valueToBeSet = Data.excelSheetMap.get(sheetName).get(j).get("ValueToBeSet");
-                    extraActionIndicator = Data.excelSheetMap.get(sheetName).get(j).get("ExtraActionIndicator");
+            Data.getExcelSheetMap().put(sheetName, ExcelUtils.getData(Data.getExcelSheetFileName(), Data.getExcelSheetFilePath(), sheetName));
+            for (int j = 0; j < Data.getExcelSheetMap().get(sheetName).size(); j++) {
+                uiObjectName = Data.getExcelSheetMap().get(sheetName).get(j).get("UiObjectName");
+                actionType = Data.getExcelSheetMap().get(sheetName).get(j).get("ActionType");
+                valueToBeSet = Data.getExcelSheetMap().get(sheetName).get(j).get("ValueToBeSet");
+                extraActionIndicator = Data.getExcelSheetMap().get(sheetName).get(j).get("ExtraActionIndicator");
 
-                    valueToBeSet = checkDoubleQuotes(valueToBeSet);
-                    extraActionIndicator = checkDoubleQuotes(extraActionIndicator);
+                valueToBeSet = checkDoubleQuotes(valueToBeSet);
+                extraActionIndicator = checkDoubleQuotes(extraActionIndicator);
 
-                    Scroller.scrollUntilElementVisible(uiObjectName, null, 0);
-                    set(uiObjectName, actionType, valueToBeSet, extraActionIndicator);
-                }
+                Scroller.scrollUntilElementVisible(uiObjectName, null, 0);
+                set(uiObjectName, actionType, valueToBeSet, extraActionIndicator);
             }
             return true;
         } catch (Exception e) {

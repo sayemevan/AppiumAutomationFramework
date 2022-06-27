@@ -12,6 +12,7 @@ public class HomePage {
             ObjectActions.set("UiReadAndAccept", "LCLICK", null, null);
             ObjectVisibility.assertInVisibility("UiReadAndAccept","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Error!! Application home page is not visible!");
             e.printStackTrace();
         }
     }
@@ -22,6 +23,7 @@ public class HomePage {
             Scroller.dynamicScrollToElementAndClick("UiSpecificCategoriesList", "UiAllCategoriesList", categoryName, 10);
             ObjectVisibility.assertInVisibility("UiOurCategories","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Error!! User can't select application category.");
             e.printStackTrace();
         }
     }

@@ -5,14 +5,14 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
+import register.Data;
+import register.Driver;
+import register.Element;
 import utilities.PropertyUtils;
 
 
 import java.time.Duration;
 import java.util.List;
-
-import static register.Data.*;
-import static register.Element.*;
 
 public class Scroller {
 
@@ -24,8 +24,8 @@ public class Scroller {
     public static void scrollToElementAndClick(String uiObjectName, String elementNameForScrollBetween, int maxTimeInSecOfScrolling){
         String objectsPropertyValue = PropertyUtils.getValue(uiObjectName);
         scrollWithTime(objectsPropertyValue, elementNameForScrollBetween, maxTimeInSecOfScrolling);
-        if(getElements(objectsPropertyValue).size() > 0){
-            getElements(objectsPropertyValue).get(0).click();
+        if(Element.getElements(objectsPropertyValue).size() > 0){
+            Element.getElements(objectsPropertyValue).get(0).click();
         }
     }
 
@@ -35,13 +35,13 @@ public class Scroller {
             objectsPropertyValue = "XPATH~"+objectsPropertyValue.split("~")[1] + dynamicText + objectsPropertyValue.split("~")[2];
         }
         scrollWithTime(objectsPropertyValue, elementNameForScrollBetween, maxTimeInSecOfScrolling);
-        if(getElements(objectsPropertyValue).size() > 0){
-            getElements(objectsPropertyValue).get(0).click();
+        if(Element.getElements(objectsPropertyValue).size() > 0){
+            Element.getElements(objectsPropertyValue).get(0).click();
         }
     }
 
     public static void scrollToElementByText(String searchedText, int instanceNo){
-        ANDROID_DRIVER.findElementByAndroidUIAutomator(
+        Driver.getDriver().findElementByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""
                         + searchedText + "\").instance("+ instanceNo +"))").click();
     }
@@ -54,7 +54,7 @@ public class Scroller {
             amountOfscroll = scrollAmount;
         }
         for(int i = 0; i < amountOfscroll; i++) {
-            dimension = ANDROID_DRIVER.manage().window().getSize();
+            dimension = Driver.getDriver().manage().window().getSize();
             scrollHeightStart = dimension.getHeight() * 0.5;
             scrollStart = (int) scrollHeightStart;
             scrollHeightEnd = dimension.getHeight() * 0.2;
@@ -69,7 +69,7 @@ public class Scroller {
         int midOfYCoordinator, firstElementXCoordinator, lastElementXCoordinator;
 
         String objectsPropertyValue = PropertyUtils.getValue(multipleValXpaths);
-        List<MobileElement> mobileElementList = getElements(objectsPropertyValue);
+        List<MobileElement> mobileElementList = Element.getElements(objectsPropertyValue);
         firstElement = mobileElementList.get(0);
         lastElement = mobileElementList.get(mobileElementList.size()-1);
 
@@ -82,7 +82,7 @@ public class Scroller {
     }
 
     public static void touchActionPerform(int startX, int startY, int endX, int endY){
-        new TouchAction(ANDROID_DRIVER)
+        new TouchAction(Driver.getDriver())
                 .press(PointOption.point(startX, startY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(endX, endY))
@@ -90,7 +90,7 @@ public class Scroller {
     }
 
     private static long scrollMethodTimeCount(int maxTimeInSecOfScrolling){
-        long waitTime = MAX_WAIT_TIME * 1000;
+        long waitTime = Data.getDefaultMaxWaitTime() * 1000;
         if(maxTimeInSecOfScrolling > 0){
             waitTime = maxTimeInSecOfScrolling * 1000;
         }
@@ -101,7 +101,7 @@ public class Scroller {
         long startTime, endTime;
         startTime = System.currentTimeMillis();
         endTime = startTime + scrollMethodTimeCount(maxTimeInSecOfScrolling);
-        while (getElements(objectsPropertyValue).size() == 0){
+        while (Element.getElements(objectsPropertyValue).size() == 0){
             scrolling(elementNameForScrollBetween);
             if(System.currentTimeMillis() > endTime){
                 break;

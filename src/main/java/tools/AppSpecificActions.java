@@ -4,6 +4,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import register.Data;
+import register.Driver;
 import register.PropertyFile;
 import utilities.PropertyUtils;
 
@@ -16,14 +17,16 @@ public class AppSpecificActions {
 
             DesiredCapabilities desCap = new DesiredCapabilities();
             //device information
-            desCap.setCapability("platformName", Data.PLATFORM_NAME);
-            desCap.setCapability("deviceName", Data.DEVICE_NAME);
+            desCap.setCapability("platformName", Data.getPlatformName());
+            desCap.setCapability("deviceName", Data.getDeviceName());
             //app inforamtion
-            desCap.setCapability("app", Data.APP);
-            desCap.setCapability("appPackage", Data.APP_PACKAGE);
-            desCap.setCapability("appActivity", Data.APP_ACTIVITY);
+            desCap.setCapability("app", Data.getAPP());
+            desCap.setCapability("appPackage", Data.getAppPackage());
+            desCap.setCapability("appActivity", Data.getAppActivity());
 
-            Data.ANDROID_DRIVER = new AndroidDriver<MobileElement>(new URL(Data.APPIUM_SERVER_URL), desCap);
+            //Driver initialize
+            new Driver(new AndroidDriver<>(new URL(Data.getAppiumServerUrl()), desCap));
+
             System.out.println("App lunched!");
         } catch (Exception e){
             e.printStackTrace();
@@ -31,11 +34,15 @@ public class AppSpecificActions {
     }
 
     public static void closeApp() {
-        Data.ANDROID_DRIVER.closeApp();
+        Driver.getDriver().closeApp();
     }
 
     public static void loadPrimaryData(){
-        Data.LIST_OF_ALL_PROPERTIES.put(PropertyFile.APP_LOCATOR_VALUES, PropertyUtils.getProperties(Data.APP_LOCATOR_PATH, Data.APP_LOCATOR_FILE_NAME));
-        Data.LIST_OF_ALL_PROPERTIES.put(PropertyFile.UTILITY_OBJECTS, PropertyUtils.getProperties(Data.APP_LOCATOR_PATH, Data.UTILITY_OBJECTS_FILE_NAME));
+        try {
+            Data.getListOfAllProperties().put(PropertyFile.APP_LOCATOR_VALUES, PropertyUtils.getProperties(Data.getAppLocatorPath(), Data.getAppLocatorFileName()));
+            Data.getListOfAllProperties().put(PropertyFile.UTILITY_OBJECTS, PropertyUtils.getProperties(Data.getAppLocatorPath(), Data.getUtilityObjectsFileName()));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
