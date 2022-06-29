@@ -1,5 +1,6 @@
 Feature: NopStation eCommerce Mobile App testing
 
+  @tag1
   Scenario: Customer add products in his shopping cart
     Given Mike on home page after opening nopCart mobile app
     When Mike click "Electronics" from our categories list from home page
@@ -8,6 +9,7 @@ Feature: NopStation eCommerce Mobile App testing
     And Mike click plus button to increase Qty by "2"
     Then Mike click add to cart button to add the product in his cart
 
+  @tag2
   Scenario: Customer successfully place order as a guest user
     Given Mike go to shopping cart by clicking top cart icon
     When Mike click checkout button from shopping cart page
