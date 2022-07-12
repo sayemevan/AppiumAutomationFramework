@@ -1,7 +1,5 @@
 package stepDefinitions;
 
-import tools.AppSpecificActions;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -46,10 +44,5 @@ public class PlaceOrderAsGuestUser {
     @And("Verify order place successfully with popup message {string}")
     public void verify_order_place_successfully_with_popup_message(String string) {
         PlaceOrderAsGuestUserDecorator.verifyPopUpMessage(string);
-    }
-
-    @AfterAll
-    public static void after_all() {
-        AppSpecificActions.closeApp();
     }
 }
