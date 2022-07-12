@@ -23,11 +23,11 @@ public class PlaceOrderAsGuestUserDecorator {
     }
 
     public static void selectShippingMethodAndContinue(String shippingMethodName){
-        ProductCheckOutDetailsPage.selectShippingMethodAndContinue(shippingMethodName);
+        ProductCheckOutDetailsPage.selectShippingMethodAndContinue(shippingMethodName, null);
     }
 
     public static void selectPaymentMethodAndContinue(String paymentMethodName){
-        ProductCheckOutDetailsPage.selectPaymentMethodAndContinue(paymentMethodName);
+        ProductCheckOutDetailsPage.selectPaymentMethodAndContinue(paymentMethodName, null);
     }
 
     public static void clickNextButton(){
@@ -42,7 +42,6 @@ public class PlaceOrderAsGuestUserDecorator {
         String actualMsg = ProductCheckOutDetailsPage.getOrderSuccessPopUpMessage();
         System.out.println("Actual Success Msg: " + actualMsg);
         ProductCheckOutDetailsPage.clickOrderSuccessContinueButton();
-//        Assert.assertEquals(actualMsg, expectedMessage);
         if (actualMsg.equals(expectedMessage) || actualMsg.trim().startsWith(expectedMessage)) {
             return true;
         } else {

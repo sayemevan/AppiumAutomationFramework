@@ -1,56 +1,50 @@
-package actionPerformer;
+package tools;
 
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.Keys;
+import register.Element;
 import uiObjects.*;
+import utilities.PropertyUtils;
 
-import static actionPerformer.ObjectVisibility.visibilityAssert;
-import static register.ElementFinder.getElement;
-import static utilities.ObjectRepositoryActions.getRepoValue;
-import static utilities.SpecificItemSelector.scrollUntilElementVisible;
-
-public class ObjectSpecificValues {
-    public static String valueGet(String uiObjectName, String propertyName, String extraParam){
+public class ObjectValues {
+    public static String get(String uiObjectName, String propertyName, String extraParam){
         try {
-            String outputValue = "", uiObjectDetails = getRepoValue(uiObjectName);
-            if (!visibilityAssert(uiObjectName, "DEFAULT", null)) {
+            String outputValue = "", uiObjectDetails = PropertyUtils.getValue(uiObjectName);
+            if (!ObjectVisibility.assertVisibility(uiObjectName, "DEFAULT", null)) {
                 return outputValue;
             }
-            MobileElement mobileElement = getElement(uiObjectDetails);
+            MobileElement mobileElement = Element.getElement(uiObjectDetails);
             if (uiObjectName == null || propertyName == null || mobileElement == null || propertyName == null) {
                 return outputValue;
             }
 
-            scrollUntilElementVisible(uiObjectName, null);
-
             switch (uiObjectDetails.split("~")[2].trim().toUpperCase()) {
                 case "TEXTBOX":
                     TextBox textBox = new TextBox(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, textBox);
+                    outputValue = extractPropertyName(propertyName, textBox);
                     break;
                 case "PUSHBUTTON":
                     PushButton pushButton = new PushButton(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, pushButton);
+                    outputValue = extractPropertyName(propertyName, pushButton);
                     break;
                 case "ICONBUTTON":
                     IconButton iconButton = new IconButton(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, iconButton);
+                    outputValue = extractPropertyName(propertyName, iconButton);
                     break;
                 case "LISTBOX":
                     ListBox listBox = new ListBox(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, listBox);
+                    outputValue = extractPropertyName(propertyName, listBox);
                     break;
                 case "PREVIEW":
                     PreView preView = new PreView(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, preView);
+                    outputValue = extractPropertyName(propertyName, preView);
                     break;
                 case "RADIOBUTTON":
                     RadioButton radioButton = new RadioButton(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, radioButton);
+                    outputValue = extractPropertyName(propertyName, radioButton);
                     break;
                 case "LISTVIEW":
                     ListView listView = new ListView(mobileElement);
-                    outputValue = propertyNameExtractor(propertyName, listView);
+                    outputValue = extractPropertyName(propertyName, listView);
                     break;
             }
             return outputValue;
@@ -60,7 +54,7 @@ public class ObjectSpecificValues {
         }
     }
 
-    private static String propertyNameExtractor(String propertyName, MobileElement mobileElement) {
+    private static String extractPropertyName(String propertyName, MobileElement mobileElement) {
         String outputValue = "";
         switch (propertyName.trim().toUpperCase()) {
             case "DEFAULT":

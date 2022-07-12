@@ -1,16 +1,12 @@
 package uiObjects;
 
-import io.appium.java_client.FindsByAndroidUIAutomator;
 import io.appium.java_client.MobileElement;
-import register.WrapsMobileElement;
 
-import static register.DataProvider.*;
-
-public abstract class GenericTypes extends MobileElement implements WrapsMobileElement {
+public abstract class TypifiedElement extends MobileElement implements WrapsMobileElement {
 
     private final MobileElement wrappedMobileElement;
 
-    public GenericTypes(MobileElement wrappedMobileElement) {
+    public TypifiedElement(MobileElement wrappedMobileElement) {
         this.wrappedMobileElement = wrappedMobileElement;
     }
 
@@ -62,12 +58,5 @@ public abstract class GenericTypes extends MobileElement implements WrapsMobileE
     @Override
     public void submit() {
         getWrapsMobileElement().submit();
-    }
-
-    public static MobileElement scrollToElement(String outSiderText) {
-
-        return (MobileElement) ((FindsByAndroidUIAutomator) APPIUM_DRIVER).findElementByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector()" + ".scrollable(true)).scrollIntoView("
-                        + "new UiSelector().description("+ outSiderText +"));");
     }
 }

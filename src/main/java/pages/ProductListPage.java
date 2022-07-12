@@ -1,15 +1,14 @@
 package pages;
 
-import static actionPerformer.ObjectVisibility.visibilityAssert;
-import static utilities.SpecificItemSelector.dynamicScrollToElement;
+import tools.ObjectVisibility;
+import tools.Scroller;
 
 public class ProductListPage {
 
     public static void selectProductForDetails(String productName){
         try {
-            visibilityAssert("UiElectronicProducts", "DEFAULT", null);
-            dynamicScrollToElement("UiSpecificCategoriesList", null, productName);
-            Thread.sleep(3000);
+            ObjectVisibility.assertVisibility("UiElectronicProducts", "DEFAULT", null);
+            Scroller.dynamicScrollToElementAndClick("UiSpecificCategoriesList", null, productName, 10);
         } catch (Exception e){
             e.printStackTrace();
         }

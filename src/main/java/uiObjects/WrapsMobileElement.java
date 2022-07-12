@@ -1,4 +1,4 @@
-package register;
+package uiObjects;
 
 import io.appium.java_client.MobileElement;
 

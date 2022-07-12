@@ -1,29 +1,34 @@
 package pages;
 
-import actionPerformer.AppSpecificActions;
+import io.appium.java_client.MobileElement;
+import org.openqa.selenium.support.FindBy;
+import tools.ObjectVisibility;
+import tools.Scroller;
 
-import static actionPerformer.ObjectSpecificActions.actionSet;
-import static actionPerformer.ObjectVisibility.visibilityAssert;
-import static utilities.SpecificItemSelector.dynamicScrollToElement;
 
 public class HomePage {
 
+    //Page object model example
+    @FindBy(id = "btnAccept")
+    private static MobileElement readAndAcceptBtn;
+
     public static void userOnHomePage(){
         try {
-            AppSpecificActions.lunchApp();
-            actionSet("UiReadAndAccept", "LCLICK", null, null);
-            Thread.sleep(3000);
+            readAndAcceptBtn.click();
+            ObjectVisibility.assertInVisibility("UiReadAndAccept","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Error!! Application home page is not visible!");
             e.printStackTrace();
         }
     }
 
     public static void selectCategoryFromHomePage(String categoryName) {
         try {
-            visibilityAssert("UiOurCategories", "DEFAULT", null);
-            dynamicScrollToElement("UiSpecificCategoriesList", "UiAllCategoriesList", categoryName);
-            Thread.sleep(3000);
+            ObjectVisibility.assertVisibility("UiOurCategories", "DEFAULT", null);
+            Scroller.dynamicScrollToElementAndClick("UiSpecificCategoriesList", "UiAllCategoriesList", categoryName, 10);
+            ObjectVisibility.assertInVisibility("UiOurCategories","DEFAULT", null);
         } catch (Exception e){
+            System.out.println("Error!! User can't select application category.");
             e.printStackTrace();
         }
     }

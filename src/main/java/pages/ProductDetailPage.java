@@ -1,24 +1,23 @@
 package pages;
 
-import static actionPerformer.ObjectSpecificActions.actionSet;
-import static actionPerformer.ObjectVisibility.visibilityAssert;
-import static utilities.SpecificItemSelector.scrollUntilElementVisible;
+import tools.ObjectActions;
+import tools.ObjectVisibility;
+import tools.Scroller;
 
 public class ProductDetailPage {
 
     public static void selectProductSize(String productSize){
         try {
-            visibilityAssert("UiNokiaLumia", "DEFAULT", null);
-            scrollUntilElementVisible("UiSize", null);
-            actionSet("UiSize", "LCLICK", null, null);
-            Thread.sleep(500);
+            ObjectVisibility.assertVisibility("UiNokiaLumia", "DEFAULT", null);
+            Scroller.scrollUntilElementVisible("UiSize", null, 10);
+            ObjectActions.set("UiSize", "LCLICK", null, null);
             if(productSize.trim().equals("Large")) {
-                actionSet("UiLarge", "LCLICK", null, null);
+                ObjectActions.set("UiLarge", "LCLICK", null, null);
             } else if (productSize.trim().equals("Small")){
-                actionSet("UiSmall", "LCLICK", null, null);
+                ObjectActions.set("UiSmall", "LCLICK", null, null);
             }
-            actionSet("UiDone", "LCLICK", null, null);
-            Thread.sleep(3000);
+            ObjectActions.set("UiDone", "LCLICK", null, null);
+            ObjectVisibility.assertInVisibility("UiLarge","DEFAULT", null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,13 +25,12 @@ public class ProductDetailPage {
 
     public static void selectProductQuantityBy(String size){
         try {
-            visibilityAssert("UiPlusIconBtn", "DEFAULT", null);
+            ObjectVisibility.assertVisibility("UiPlusIconBtn", "DEFAULT", null);
             int i = 0;
             while (i < Integer.parseInt(size)) {
-                actionSet("UiPlusIconBtn", "LCLICK", null, null);
+                ObjectActions.set("UiPlusIconBtn", "LCLICK", null, null);
                 i++;
             }
-            Thread.sleep(3000);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -48,9 +46,7 @@ public class ProductDetailPage {
 
     public static void pressAddToCartButton(){
         try {
-            visibilityAssert("UiAddToCart", "DEFAULT", null);
-            actionSet("UiAddToCart", "LCLICK", null, null);
-            Thread.sleep(3000);
+            ObjectActions.set("UiAddToCart", "LCLICK", null, null);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -58,8 +54,7 @@ public class ProductDetailPage {
 
     public static void goToShoppingCart(){
         try {
-            actionSet("UiCartIconBtn", "LCLICK", null, null);
-            Thread.sleep(3000);
+            ObjectActions.set("UiCartIconBtn", "LCLICK", null, null);
         } catch (Exception e){
             e.printStackTrace();
         }

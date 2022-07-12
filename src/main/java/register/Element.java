@@ -5,16 +5,14 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static register.DataProvider.*;
-
-public class ElementFinder {
+public class Element {
     public static MobileElement getElement(String searchedElementString) {
-        return APPIUM_DRIVER.findElement(getSpecificElementType(searchedElementString));
+        return Driver.getDriver().findElement(getElementType(searchedElementString));
     }
     public static List<MobileElement> getElements(String searchedElementString) {
-        return APPIUM_DRIVER.findElements(getSpecificElementType(searchedElementString));
+        return Driver.getDriver().findElements(getElementType(searchedElementString));
     }
-    public static By getSpecificElementType(String searchedElementString){
+    public static By getElementType(String searchedElementString){
         String[] splitedElementString = searchedElementString.split("~");
         if(splitedElementString[0].trim().equals("ID")){
             return By.id(splitedElementString[1]);
