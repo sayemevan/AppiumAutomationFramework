@@ -2,6 +2,7 @@ package pages;
 
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.support.FindBy;
+import tools.ObjectActions;
 import tools.ObjectVisibility;
 import tools.Scroller;
 
@@ -14,7 +15,7 @@ public class HomePage {
 
     public static void userOnHomePage(){
         try {
-            readAndAcceptBtn.click();
+            ObjectActions.set("UiReadAndAccept", "LCLICK", null, null);
             ObjectVisibility.assertInVisibility("UiReadAndAccept","DEFAULT", null);
         } catch (Exception e){
             System.out.println("Error!! Application home page is not visible!");
